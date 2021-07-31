@@ -3,11 +3,6 @@
     <meta charset="utf-8" />
     <title></title>
     <style>
-
-        /*
-            表示設定 (1)
-        */
-
         * {
             /* フォント （一部のフォントは上手く適用されない） */
             font-family: "Meiryo";
@@ -32,46 +27,12 @@
             background-color: transparent;
         }
 
-        .resizeHandle {
-            /* リサイズ用のハンドル
-             * リサイズができる場所はウィンドウ右下の16x16ピクセルの場所
-             * この部分が完全に透明だとマウス入力が透過してしまってサイズを変更できなくなる */
-            background-image: url(handle.png);
-            background-position: bottom right;
-            background-repeat: no-repeat;
-            box-sizing: border-box;
-        }
-
-        #combatantTable {
-            width: 100%;
-            table-layout: fixed;
-            border-collapse: collapse;
-        }
-
-        /* キャラクターデータのテキストの設定 */
-        #combatantTableBody * {
-            color: #E2EBF5;
-            text-shadow: -1px 0 3px #217AA2, 0 1px 3px #217AA2, 1px 0 3px #217AA2, 0 -1px 3px #217AA2;
-            font-weight: 300;
-
-            /* はみ出たテキストを「…」で省略する */
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
         /* エンカウント情報とテーブルヘッダ内のテキストの設定 */
-        #encounter,
-        #combatantTableHeader * {
+        #encounter{
             color: #DED7BE;
             text-shadow: -1px 0 2px #795516, 0 1px 2px #795516, 1px 0 2px #795516, 0 -1px 2px #795516;
             font-weight: 300;
             white-space: nowrap;
-        }
-
-        /* テーブルヘッダの下線の設定 */
-        #combatantTableHeader tr {
-            border-bottom: 1px solid #DED7BE;
         }
 
     </style>
@@ -108,14 +69,9 @@
 <body>
 
     <div id="encounter">
-        No data to show.
+        1
         <!-- ここにエンカウント情報が入る -->
     </div>
-
-    <table id="combatantTable">
-        <!-- ここにヘッダが入る -->
-        <!-- ここに各キャラの情報が入る -->
-    </table>
 
 </body>
 </html>
