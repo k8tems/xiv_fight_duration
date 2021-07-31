@@ -28,7 +28,7 @@
         }
 
         /* エンカウント情報とテーブルヘッダ内のテキストの設定 */
-        #encounter{
+        #duration{
             color: #DED7BE;
             text-shadow: -1px 0 2px #795516, 0 1px 2px #795516, 1px 0 2px #795516, 0 -1px 2px #795516;
             font-weight: 300;
@@ -62,14 +62,14 @@
         // 表示要素の更新
         function update(data) {
             console.log("data " + data.Encounter.duration);
-            document.getElementById('encounter').innerText = data.Encounter.duration;
+            document.getElementById('duration').innerText = data.Encounter.duration;
         }
     </script>
 </head>
 <body>
 
-    <div id="encounter">
-        1
+    <div id="duration">
+        2
         <!-- ここにエンカウント情報が入る -->
     </div>
 
