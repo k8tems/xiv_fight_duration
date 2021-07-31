@@ -47,9 +47,7 @@
         addOverlayListener("CombatData", (e) => update(e));
         startOverlayEvents();
 
-        // 表示要素の更新
         function update(data) {
-            console.log("data " + data.Encounter.duration);
             document.getElementById('duration').innerText = data.Encounter.duration;
         }
     </script>
