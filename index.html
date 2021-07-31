@@ -77,39 +77,6 @@
     </style>
     <script src="https://ngld.github.io/OverlayPlugin/assets/shared/common.min.js"></script>
     <script>
-
-        //
-        // プラグイン側から以下のような ActXiv オブジェクトとしてデータが提供される
-        //
-        // var ActXiv = {
-        //    "Encounter": {...},
-        //    "Combatant": {
-        //        "PlayerName1": {...},
-        //        "PlayerName2": {...},
-        //        ...
-        //    }
-        // };
-        //
-        // データの更新は 1 秒毎。
-        //
-        // プラグインから onOverlayDataUpdate イベントが発行されるので、それを受信することもできる
-        // イベントハンドラの第一引数の detail プロパティ内に上記のオブジェクトが入る
-        //
-
-        //
-        // 表示設定 (2)
-        //
-
-        // エンカウント情報の定義
-        var encounterDefine = "{duration}";
-
-        // 上記のエンカウント情報を HTML として扱うなら true
-        var useHTMLEncounterDefine = false;
-
-        //
-        // 以下表示用スクリプト
-        //
-
         // onOverlayStateUpdate イベントを購読
         document.addEventListener("onOverlayStateUpdate", function (e) {
             if (!e.detail.isLocked) {
@@ -133,73 +100,9 @@
 
         // 表示要素の更新
         function update(data) {
-            updateEncounter(data);
+            console.log("data " + data.Encounter.duration);
+            document.getElementById('encounter').innerText = data.Encounter.duration;
         }
-
-        // エンカウント情報を更新する
-        function updateEncounter(data) {
-            // 要素取得
-            var encounterElem = document.getElementById('encounter');
-
-            // テキスト取得
-            var elementText;
-            if (typeof encounterDefine === 'function') {
-                elementText = encounterDefine(data.Encounter);
-                if (typeof elementText !== 'string') {
-                    console.log("updateEncounter: 'encounterDefine' is declared as function but not returns a value as string.");
-                    return;
-                }
-            } else if (typeof encounterDefine === 'string') {
-                elementText = parseActFormat(encounterDefine, data.Encounter);
-            } else {
-                console.log("updateEncounter: 'encounterDefine' should be string or function that returns string.");
-                return;
-            }
-
-            // テキスト設定
-            if (!useHTMLEncounterDefine) {
-                encounterElem.innerText = parseActFormat(elementText, data.Encounter);
-            } else {
-                encounterElem.innerHTML = parseActFormat(elementText, data.Encounter);
-            }
-        }
-
-        // Miniparse フォーマット文字列を解析し、表示文字列を取得する
-        function parseActFormat(str, dictionary)
-        {
-            var result = "";
-
-            var currentIndex = 0;
-            do {
-                var openBraceIndex = str.indexOf('{', currentIndex);
-                if (openBraceIndex < 0) {
-                    result += str.slice(currentIndex);
-                    break;
-                }
-                else {
-                    result += str.slice(currentIndex, openBraceIndex);
-                    var closeBraceIndex = str.indexOf('}', openBraceIndex);
-                    if (closeBraceIndex < 0) {
-                        // parse error!
-                        console.log("parseActFormat: Parse error: missing close-brace for " + openBraceIndex.toString() + ".");
-                        return "ERROR";
-                    }
-                    else {
-                        var tag = str.slice(openBraceIndex + 1, closeBraceIndex);
-                        if (typeof dictionary[tag] !== 'undefined') {
-                            result += dictionary[tag];
-                        } else {
-                            console.log("parseActFormat: Unknown tag: " + tag);
-                            result += "ERROR";
-                        }
-                        currentIndex = closeBraceIndex + 1;
-                    }
-                }
-            } while (currentIndex < str.length);
-
-            return result;
-        }
-
     </script>
 </head>
 <body>
