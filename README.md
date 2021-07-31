@@ -1,0 +1,1 @@
+Minimal overlay for showing duration of fight
